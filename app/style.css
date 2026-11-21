@@ -1,12 +1,88 @@
-html, body { margin: 0; height: 100%; background: #f2f0f4; color: #1d1b22; font: 15px/1.4 system-ui, sans-serif; }
-.app { display: flex; gap: 32px; align-items: center; justify-content: center; height: 100%; padding: 24px; box-sizing: border-box; }
-.controls { display: flex; flex-direction: column; gap: 14px; width: 280px; }
-.controls h1 { margin: 0; font-size: 28px; }
-.controls p { margin: 0; color: #5c5866; }
-label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
-input[type=text] { font: inherit; padding: 8px; border: 1px solid #c9c4d1; border-radius: 6px; }
-button { font: inherit; font-weight: 700; padding: 10px; border: 0; border-radius: 6px; background: #1d1b22; color: #fff; cursor: pointer; }
-canvas { width: min(70vh, 60vw); height: min(70vh, 60vw); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
-body.shot-cover .controls { display: none; }
-body.shot-cover .app { padding: 0; }
-body.shot-cover canvas { width: 100vw; height: 100vh; box-shadow: none; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #04060f;
+  color: #eaf2ff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body.shot-cover { background: #04060f; overflow: hidden; }
+body.shot-cover header, body.shot-cover footer,
+body.shot-cover .controls, body.shot-cover .hint, body.shot-cover .error { display: none; }
+body.shot-cover main { padding: 0; display: block; }
+body.shot-cover .preview canvas { display: block; margin: 0 auto; border: 0; border-radius: 0; max-width: none; }
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: linear-gradient(90deg, #0a0e1e, #160a2e 55%, #0a0e1e);
+  border-bottom: 2px solid #ff2dc8;
+}
+.topbar h1 { margin: 0; font-size: 28px; letter-spacing: 2px; color: #fff; }
+.topbar h1 span {
+  background: linear-gradient(90deg, #7df3ff, #ff5fd0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+.sub { margin: 2px 0 0; color: #9fb4d8; font-size: 13px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.seg { display: flex; border: 1px solid #2a3a5f; border-radius: 8px; overflow: hidden; }
+.seg button, .toggle {
+  background: #0d1526;
+  color: #cfe0ff;
+  border: 0;
+  padding: 9px 13px;
+  font: bold 13px Arial, sans-serif;
+  cursor: pointer;
+}
+.seg button.active, .toggle.active { background: #ff2dc8; color: #fff; }
+.toggle { border: 1px solid #2a3a5f; border-radius: 8px; }
+.wanted { font: bold 13px Arial, sans-serif; color: #ffd23e; display: flex; gap: 6px; align-items: center; }
+select, input[type=text] {
+  background: #0d1526;
+  color: #eaf2ff;
+  border: 1px solid #2a3a5f;
+  border-radius: 6px;
+  padding: 8px;
+  font: 14px Arial, sans-serif;
+}
+.export {
+  background: linear-gradient(90deg, #00d2ff, #ff2dc8);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font: bold 14px Arial, sans-serif;
+  cursor: pointer;
+}
+.error { color: #ff6b6b; padding: 0 20px; }
+main { padding: 18px 20px; display: grid; gap: 18px; }
+.preview canvas {
+  width: 100%;
+  max-width: 1280px;
+  height: auto;
+  display: block;
+  border: 1px solid #2a3a5f;
+  border-radius: 6px;
+  background: #000;
+}
+.hint { color: #9fb4d8; font-size: 13px; }
+.controls { display: grid; gap: 16px; grid-template-columns: 300px 1fr; align-items: start; }
+.text-card, .panel-card {
+  background: #0a0f22;
+  border: 1px solid #22345c;
+  border-radius: 10px;
+  padding: 14px;
+}
+.text-card h2, .panel-card h3 { margin: 0 0 10px; font-size: 16px; color: #7df3ff; }
+.panel-card h3 { font-size: 14px; }
+.controls label { display: block; margin: 8px 0; font-size: 13px; color: #cfe0ff; }
+.controls label input, .controls label select { width: 100%; margin-top: 4px; }
+.panels { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+footer { padding: 12px 20px 24px; color: #7d8fb5; font-size: 12px; }
+@media (max-width: 900px) { .controls { grid-template-columns: 1fr; } }

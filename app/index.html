@@ -1,23 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
-<link rel="stylesheet" href="./style.css">
+<title>NEON VICE Cover Studio</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+<header class="topbar">
+  <div>
+    <h1>NEON VICE <span>Cover Studio</span></h1>
+    <p class="sub">Seven-panel GTA 6-style story cover maker — night neon-noir, rain-slicked downtown.</p>
+  </div>
+  <div class="toolbar">
+    <div class="seg" role="group" aria-label="Layout">
+      <button type="button" data-layout="story" class="active">7-Panel Story</button>
+      <button type="button" data-layout="classic">5-Panel Classic</button>
+      <button type="button" data-layout="hero">Hero Focus</button>
+    </div>
+    <button type="button" id="nightToggle" class="toggle active">NIGHT</button>
+    <label class="wanted"><input type="checkbox" id="wantedToggle" checked> WANTED ★★★★★</label>
+    <select id="exportSize" aria-label="Export size">
+      <option value="1920x1080">1920 × 1080 landscape</option>
+      <option value="1080x1080">1080 × 1080 square</option>
+      <option value="1080x1350">1080 × 1350 portrait</option>
+    </select>
+    <button type="button" id="exportBtn" class="export">Export PNG</button>
+  </div>
+</header>
+<p id="loadError" class="error"></p>
+<main>
+  <section class="preview">
+    <canvas id="coverCanvas" width="1280" height="720"></canvas>
+    <p class="hint">Your photos never leave this machine — uploads are read locally and cropped per panel below.</p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <section class="controls">
+    <div class="text-card">
+      <h2>Cover text</h2>
+      <label>Title <input type="text" id="titleInput" value="NEON VICE"></label>
+      <label>Script <input type="text" id="scriptInput" value="Midnight Rain"></label>
+      <label>Quote <input type="text" id="quoteInput" value="THE CITY NEVER DRIES"></label>
+      <label>Station <input type="text" id="stationInput" value="VICE FM 99.9"></label>
+      <label>Tagline <input type="text" id="taglineInput" value="THE CITY NEVER DRIES · COMING SOON"></label>
+    </div>
+    <div id="panels" class="panels"></div>
+  </section>
 </main>
-<script type="module" src="./src/main.js"></script>
+<footer>
+  <p>NEON VICE Cover Studio — original art, AI-generated photos, no Rockstar artwork or logos. Export a PNG and share it.</p>
+</footer>
+<script type="module" src="src/main.js"></script>
 </body>
 </html>
